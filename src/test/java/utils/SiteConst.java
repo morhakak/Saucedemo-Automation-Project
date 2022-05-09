@@ -1,0 +1,8 @@
+package utils;
+
+public enum SiteConst {
+    ALL_ITEMS, ABOUT, LOGOUT, RESET_APP_STATE,
+    TWITTER, LINKEDIN, FACEBOOK,
+    NAME_A_TO_Z, NAME_Z_TO_A, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH
+}
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Saucedemo Testing - Full Regression">
+    <listeners>
+        <listener class-name="utils.Listeners"/>
+    </listeners>
+    <test name="Full Regression"  parallel="classes" thread-count="5">
+        <parameter name="baseUrl" value="https://www.saucedemo.com/"/>
+        <parameter name="browser" value="chrome"/>
+        <groups>
+            <run>
+                <include name="sanity"/>
+                <include name="regression"/>
+                <include name="E2E"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.LoginPageTests"/>
+            <class name="tests.ProductsPageTests"/>
+            <class name="tests.ItemPageTests"/>
+            <class name="tests.CartPageTests"/>
+            <class name="tests.CheckoutInfoPageTests"/>
+            <class name="tests.CheckoutCompleteTests"/>
+            <class name="tests.CheckoutOverviewTests"/>
+            <class name="tests.NavbarTests"/>
+            <class name="tests.FooterTests"/>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
