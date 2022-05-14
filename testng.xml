@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Saucedemo Testing - Full Regression">
     <listeners>
-        <listener class-name="utils.Listeners"/>
+        <listener class-name="utils.Listener"/>
     </listeners>
     <test name="Full Regression"  parallel="classes" thread-count="5">
         <parameter name="baseUrl" value="https://www.saucedemo.com/"/>

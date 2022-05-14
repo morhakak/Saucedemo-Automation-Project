@@ -1,10 +1,10 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.SiteConst;
-
 import java.util.List;
 
 public class Navbar extends Footer {
@@ -23,37 +23,41 @@ public class Navbar extends Footer {
         super(driver);
     }
 
+    @Step("Navbar: Click on cart button")
     public CartPage goToCart() {
         click(shoppingCartLink);
         return new CartPage(driver);
     }
 
+    @Step("Navbar: Checking if cart is empty")
     public boolean isCartEmpty() {
         return !driver.getPageSource().contains("shopping_cart_badge");
     }
 
+    @Step("Navbar: Open menu")
     private Navbar openMenu() {
-        waitAndClick(menuButton);
+        click(menuButton);
         return new Navbar(driver);
     }
 
+    @Step("Navbar: Click on {menuLink} option")
     public void clickOnMenuOption(SiteConst menuLink) {
         switch (menuLink) {
             case ALL_ITEMS:
                 openMenu();
-                waitAndClick(menuLinks.get(0));
+                click(menuLinks.get(0));
                 break;
             case ABOUT:
                 openMenu();
-                waitAndClick(menuLinks.get(1));
+                click(menuLinks.get(1));
                 break;
             case LOGOUT:
                 openMenu();
-                waitAndClick(menuLinks.get(2));
+                click(menuLinks.get(2));
                 break;
             case RESET_APP_STATE:
                 openMenu();
-                waitAndClick(menuLinks.get(3));
+                click(menuLinks.get(3));
                 break;
         }
     }

@@ -1,10 +1,10 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.List;
 
 public class CartPage extends Navbar {
@@ -32,16 +32,19 @@ public class CartPage extends Navbar {
         return getText(cartPageHeader);
     }
 
+    @Step("Cart page: Click on \"CONTINUE SHOPPING\" button")
     public ProductsPage continueShopping() {
         click(continueShoppingBtn);
         return new ProductsPage(driver);
     }
 
+    @Step("Cart page: Click on \"CHECKOUT\" button")
     public CheckoutInfoPage proceedToCheckoutInfoPage() {
         click(checkoutBtn);
         return new CheckoutInfoPage(driver);
     }
 
+    @Step("Cart page: Removing {itemName} item from cart")
     public CartPage removeItemFromCart(String itemName) {
         for (WebElement item : cartItems) {
             WebElement itemTitle = item.findElement(By.className(".inventory_item_name"));

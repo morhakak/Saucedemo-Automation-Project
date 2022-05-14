@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,12 +27,14 @@ public class ItemPage extends Navbar {
         super(driver);
     }
 
+    @Step("Click on \"ADD TO CART\" button")
     public ItemPage addItemToCart() {
         if (!isItemAdded())
             click(addToCartButton);
         return this;
     }
 
+    @Step("Item page: Click on \"REMOVE\" button")
     public void removeItemFromCart() {
         if (isItemAdded())
             click(removeFromCartButton);
@@ -46,6 +49,7 @@ public class ItemPage extends Navbar {
         return buttonCaption.contains("remove");
     }
 
+    @Step("Item page: Click on \"BACK TO PRODUCTS\" button")
     public ProductsPage goBackToProductsPage() {
         click(backToProductsButton);
         return new ProductsPage(driver);

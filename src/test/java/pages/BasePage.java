@@ -7,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -27,29 +26,42 @@ public class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void type(WebElement el, String text) {
-        highlightElement(el, "green");
-        el.clear();
-        el.sendKeys(text);
-        pressOnTab(el);
-//        sleep(3000);
+    public void type(WebElement element, String text) {
+        waitForElementToBeVisible(element);
+        element.clear();
+        element.sendKeys(text);
+        pressOnTab(element);
     }
 
-    public void click(WebElement el) {
-        highlightElement(el, "yellow");
-        el.click();
-//        sleep(3000);
+    public void click(WebElement element) {
+        try {
+            waitForClickableElement(element);
+            element.click();
+        } catch (ElementClickInterceptedException e) {
+            JavascriptExecutor executor = (JavascriptExecutor)driver;
+            executor.executeScript("arguments[0].click();", element);
+        }
     }
 
-    public String getText(WebElement el) {
-        String displayedText = el.getText();
-        String valueText = el.getAttribute("value");
-
+    public String getText(WebElement element) {
+        waitForElementToBeVisible(element);
+        String displayedText = element.getText();
+        String valueText = element.getAttribute("value");
         if (displayedText.isEmpty()) {
             return valueText.trim();
         } else {
             return displayedText.trim();
         }
+    }
+
+    public void waitForClickableElement(WebElement element) {
+        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public void waitForElementToBeVisible(WebElement element) {
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public void alertOk(String text) {
@@ -80,8 +92,8 @@ public class BasePage {
         driver.switchTo().newWindow(WindowType.WINDOW);
     }
 
-    public void pressOnTab(WebElement el) {
-        el.sendKeys(Keys.TAB);
+    public void pressOnTab(WebElement element) {
+        element.sendKeys(Keys.TAB);
     }
 
     public String getWindowHandle() {
@@ -141,55 +153,39 @@ public class BasePage {
         driver.navigate().refresh();
     }
 
-    public void selectByIndex(WebElement el, int index) {
-        select = new Select(el);
+    public void selectByIndex(WebElement element, int index) {
+        select = new Select(element);
         select.selectByIndex(index);
     }
 
-    public void selectByValue(WebElement el, String value) {
-        select = new Select(el);
+    public void selectByValue(WebElement element, String value) {
+        select = new Select(element);
         select.selectByValue(value);
     }
 
-    public void selectByVisibleText(WebElement el, String text) {
-        select = new Select(el);
+    public void selectByVisibleText(WebElement element, String text) {
+        select = new Select(element);
         select.selectByVisibleText(text);
     }
 
-    public void dragAndDropByOffset(WebElement el, int x, int y) {
+    public void dragAndDropByOffset(WebElement element, int x, int y) {
         action = new Actions(driver);
-        action.dragAndDropBy(el, x, y).build().perform();
+        action.dragAndDropBy(element, x, y).build().perform();
     }
 
-    public void hover(WebElement el) {
+    public void hover(WebElement element) {
         action = new Actions(driver);
-        action.moveToElement(el).build().perform();
+        action.moveToElement(element).build().perform();
     }
 
-    public void scrollElementIntoView(WebElement el) {
+    public void scrollElementIntoView(WebElement element) {
         javascriptExecutor = (JavascriptExecutor) driver;
-        javascriptExecutor.executeScript("arguments[0].scrollIntoView()", el);
+        javascriptExecutor.executeScript("arguments[0].scrollIntoView()", element);
     }
 
     public void scrollPage(int x, int y) {
         javascriptExecutor = (JavascriptExecutor) driver;
         javascriptExecutor.executeScript("window.scrollBy(" + x + "," + y + ");");
-    }
-
-    public void waitForElementText(By locator, String text) {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.textToBe(locator, text));
-    }
-
-    public void waitForElementToBeVisible(WebElement el) {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(el));
-    }
-
-    public void waitAndClick(WebElement el) {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(el));
-        click(el);
     }
 
     protected void highlightElement(WebElement element, String color) {
@@ -207,11 +203,6 @@ public class BasePage {
                 + originalStyle + "');},400);", element);
     }
 
-    /**
-     * Takes screenshot of whole page
-     *
-     * @param screenshotName The screenshot file name
-     */
     public void takeScreenshot(String screenshotName) {
         TakesScreenshot screenshot = (TakesScreenshot) driver;
         File file = screenshot.getScreenshotAs(OutputType.FILE);
@@ -222,9 +213,6 @@ public class BasePage {
         }
     }
 
-    /**
-     * Takes screenshot of single WebElement
-     */
     public void takeElementScreenshot(WebElement element, String elementName) {
         File sourceFile = element.getScreenshotAs(OutputType.FILE);
         try {

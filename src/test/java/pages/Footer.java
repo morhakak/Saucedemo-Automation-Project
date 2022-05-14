@@ -1,10 +1,10 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.SiteConst;
-
 import java.util.List;
 
 public class Footer extends BasePage {
@@ -30,16 +30,18 @@ public class Footer extends BasePage {
         }
     }
 
+    @Step("Footer: Click on Sauce Labs Twitter link")
     private SauceLabsTwitterPage clickOnTwitter() {
         click(socialList.get(0));
         return new SauceLabsTwitterPage(driver);
     }
-
+    @Step("Footer: Click on Sauce Lab Facebook link")
     private SauceLabsFacebookPage clickOnFacebook() {
         click(socialList.get(1));
         return new SauceLabsFacebookPage(driver);
     }
 
+    @Step("Footer: Click on Sauce Lab Linkedin link")
     private SauceLabsLinkedinPage clickOnLinkedin() {
         click(socialList.get(2));
         return new SauceLabsLinkedinPage(driver);

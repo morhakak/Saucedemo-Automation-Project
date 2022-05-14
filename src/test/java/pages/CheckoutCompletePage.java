@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,13 +28,15 @@ public class CheckoutCompletePage extends Navbar {
         return getText(completeHeader);
     }
 
+    @Step("Checkout complete page: Click on \"BACK HOME\" button")
     public ProductsPage clickOnBackHomeBtn() {
         click(backHomeBtn);
         return new ProductsPage(driver);
     }
 
+    @Step("Checkout complete page: Check if order completion succeeded")
     public boolean isOrderCompleted() {
-        return isCartEmpty();
+        return backHomeBtn.isDisplayed() && isCartEmpty();
     }
 
 }

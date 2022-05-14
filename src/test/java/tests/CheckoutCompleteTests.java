@@ -16,7 +16,7 @@ public class CheckoutCompleteTests extends BaseTest {
                 .goToCart().proceedToCheckoutInfoPage()
                 .setFirstName("Test").setLastName("Test2").setZipCode("123456789")
                 .proceedToOverviewPage().finishOverviewOrder();
-        Assert.assertTrue(checkoutCompletePage.isCartEmpty());
+        Assert.assertTrue(checkoutCompletePage.isOrderCompleted());
     }
 
     @Test(description = "Successful single item order completion test", groups = {"sanity", "regression", "E2E"})
@@ -29,6 +29,6 @@ public class CheckoutCompleteTests extends BaseTest {
                 .goToCart().proceedToCheckoutInfoPage()
                 .setFirstName("Test").setLastName("Test2").setZipCode("123456789")
                 .proceedToOverviewPage().finishOverviewOrder();
-        Assert.assertTrue(checkoutCompletePage.isCartEmpty());
+        Assert.assertTrue(checkoutCompletePage.isOrderCompleted());
     }
 }

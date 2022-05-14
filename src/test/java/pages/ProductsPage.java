@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.SiteConst;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +43,7 @@ public class ProductsPage extends Navbar {
         return productsPageTitle.isDisplayed();
     }
 
-    @Step("Click on {itemName} item")
+    @Step("Products page: Click on {itemName} item")
     public ItemPage clickOnItem(String itemName) {
         for (WebElement item : inventoryItems) {
             WebElement itemTitle = item.findElement(By.cssSelector(".inventory_item_name"));
@@ -57,7 +56,7 @@ public class ProductsPage extends Navbar {
         return new ItemPage(driver);
     }
 
-    @Step("Add {itemName} to cart")
+    @Step("Products page: Add {itemName} to cart")
     public ProductsPage addItemToCart(String itemName) {
         for (WebElement item : inventoryItems) {
             WebElement itemTitle = item.findElement(By.cssSelector(".inventory_item_name"));
@@ -69,7 +68,7 @@ public class ProductsPage extends Navbar {
         return new ProductsPage(driver);
     }
 
-    @Step("Remove {itemName} from cart")
+    @Step("Products page: Remove {itemName} from cart")
     public ProductsPage removeItemFromCart(String itemName) {
         if (isItemAdded(itemName)) {
             for (WebElement item : inventoryItems) {
@@ -97,7 +96,7 @@ public class ProductsPage extends Navbar {
         return false;
     }
 
-    @Step("Sort items using {sortOption} option")
+    @Step("Products page: Sort items using {sortOption} option")
     public void sortItems(SiteConst sortOption) {
         switch (sortOption) {
             case NAME_A_TO_Z:

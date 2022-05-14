@@ -5,8 +5,9 @@ import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
 
-public class Listeners extends TestListenerAdapter {
+public class Listener extends TestListenerAdapter {
 
+    public WebDriver driver;
     @Override
     public void onTestStart(ITestResult result) {
 

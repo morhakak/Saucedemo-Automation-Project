@@ -23,13 +23,13 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    @Step("login with user: {userName}")
+    @Step("Login page: Set user name as: {userName}")
     public LoginPage setUserName(String userName) {
         type(userNameInputField, userName);
         return this;
     }
 
-    @Step("login with password: {password}")
+    @Step("Login page: Set password as: {password}")
     public LoginPage setPassword(String password) {
         type(passwordInputField, password);
         return this;
@@ -39,11 +39,13 @@ public class LoginPage extends BasePage {
         return loginButton;
     }
 
-    public void clickLogin() {
+    @Step("Login page: Click on login button")
+    public ProductsPage clickLogin() {
         click(loginButton);
+        return new ProductsPage(driver);
     }
 
-    @Step("login with user: {userName} and password: {password}")
+    @Step("Login page: Login with user: {userName} and password: {password}")
     public ProductsPage login(String userName, String password) {
         setUserName(userName);
         setPassword(password);
@@ -54,22 +56,6 @@ public class LoginPage extends BasePage {
     public String getGeneralErrorMessage() {
         waitForElementToBeVisible(errorMessage);
         return getText(errorMessage);
-    }
-
-//    public String getErrorMessage() {
-//        if(getGeneralErrorMessage().contains("Username is required"))
-//            return "Epic sadface: Username is required";
-//        if (getGeneralErrorMessage())
-//    }
-
-    public boolean checkErrorMessage() {
-        if (getGeneralErrorMessage().contains("do not match") ||
-            getGeneralErrorMessage().contains("Password is required") ||
-            getGeneralErrorMessage().contains("Username is required") ||
-            getGeneralErrorMessage().contains("Sorry, this user has been locked out")){
-            return true;
-        }
-       return false;
     }
 
     public boolean isLoginButtonVisible() {
