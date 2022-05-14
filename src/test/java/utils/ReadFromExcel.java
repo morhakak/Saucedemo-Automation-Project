@@ -20,7 +20,7 @@ public class ReadFromExcel {
      *
      * @param - file path, sheet name
      */
-    public static Object[][] getTableArray(String filePath, String sheetName) {
+    public synchronized static Object[][] getTableArray(String filePath, String sheetName) {
         Object[][] tabArray = null;
 
         try {
@@ -57,7 +57,7 @@ public class ReadFromExcel {
      *
      * @param - Row num and Col num
      */
-    private static Object getCellData(int RowNum, int ColNum) throws Exception {
+    private synchronized static Object getCellData(int RowNum, int ColNum) throws Exception {
         try {
             String CellData = "";
             double numericCellData;

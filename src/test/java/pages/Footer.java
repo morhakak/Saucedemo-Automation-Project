@@ -4,7 +4,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import utils.SiteConst;
+import utils.Constants;
 import java.util.List;
 
 public class Footer extends BasePage {
@@ -16,7 +16,7 @@ public class Footer extends BasePage {
         super(driver);
     }
 
-    public void chooseFooterLink(SiteConst SocialLink) {
+    public void chooseFooterLink(Constants SocialLink) {
         switch (SocialLink) {
             case TWITTER:
                 clickOnTwitter();

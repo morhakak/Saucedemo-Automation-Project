@@ -11,10 +11,13 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import pages.*;
 import utils.ReadFromProperties;
-import utils.SiteConst;
+import utils.Constants;
 
 import java.time.Duration;
 
@@ -22,21 +25,21 @@ import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnviro
 
 public class BaseTest {
 
-    public WebDriver driver;
-    public WebDriverWait wait;
-    public LoginPage loginPage;
-    public Navbar navbar;
-    public ProductsPage productsPage;
-    public ItemPage itemPage;
-    public CartPage cartPage;
-    public CheckoutInfoPage checkoutInfoPage;
-    public CheckoutOverviewPage checkoutOverviewPage;
-    public CheckoutCompletePage checkoutCompletePage;
-    public SauceLabsPage saucelabsPage;
-    public Footer footer;
-    public SauceLabsTwitterPage sauceLabsTwitterPage;
-    public SauceLabsFacebookPage sauceLabsFacebookPage;
-    public SauceLabsLinkedinPage sauceLabsLinkedinPage;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+    protected LoginPage loginPage;
+    protected Navbar navbar;
+    protected ProductsPage productsPage;
+    protected ItemPage itemPage;
+    protected CartPage cartPage;
+    protected CheckoutInfoPage checkoutInfoPage;
+    protected CheckoutOverviewPage checkoutOverviewPage;
+    protected CheckoutCompletePage checkoutCompletePage;
+    protected SauceLabsPage saucelabsPage;
+    protected Footer footer;
+    protected SauceLabsTwitterPage sauceLabsTwitterPage;
+    protected SauceLabsFacebookPage sauceLabsFacebookPage;
+    protected SauceLabsLinkedinPage sauceLabsLinkedinPage;
 
 
     @BeforeClass(alwaysRun = true)
@@ -54,6 +57,7 @@ public class BaseTest {
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver(options);
             }
+
         }
         testContext.setAttribute("WebDriver", this.driver);
         allureEnvironmentWriter(
@@ -123,7 +127,7 @@ public class BaseTest {
     }
 
     private void resetAppState() {
-        navbar.clickOnMenuOption(SiteConst.RESET_APP_STATE);
+        navbar.clickOnMenuOption(Constants.RESET_APP_STATE);
     }
 
     protected void goToBaseUrl() {

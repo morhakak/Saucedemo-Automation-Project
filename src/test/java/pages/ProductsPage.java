@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import utils.SiteConst;
+import utils.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,7 +97,7 @@ public class ProductsPage extends Navbar {
     }
 
     @Step("Products page: Sort items using {sortOption} option")
-    public void sortItems(SiteConst sortOption) {
+    public void sortItems(Constants sortOption) {
         switch (sortOption) {
             case NAME_A_TO_Z:
                 selectByValue(sortSelector, "az");

@@ -4,7 +4,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import utils.SiteConst;
+import utils.Constants;
 import java.util.List;
 
 public class Navbar extends Footer {
@@ -41,7 +41,7 @@ public class Navbar extends Footer {
     }
 
     @Step("Navbar: Click on {menuLink} option")
-    public void clickOnMenuOption(SiteConst menuLink) {
+    public void clickOnMenuOption(Constants menuLink) {
         switch (menuLink) {
             case ALL_ITEMS:
                 openMenu();

@@ -6,7 +6,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utils.SiteConst;
+import utils.Constants;
 
 @Feature("Social Media")
 public class FooterTests extends BaseTest {
@@ -15,7 +15,7 @@ public class FooterTests extends BaseTest {
     @Severity(SeverityLevel.MINOR)
     @Description("Verify that the user can navigate to Sauce Labs twitter page via footer")
     public void clickOnTwitterTest() {
-        productsPage.chooseFooterLink(SiteConst.TWITTER);
+        productsPage.chooseFooterLink(Constants.TWITTER);
         Assert.assertTrue(sauceLabsTwitterPage.getPageUrl().contains("twitter"));
     }
 
@@ -23,7 +23,7 @@ public class FooterTests extends BaseTest {
     @Severity(SeverityLevel.MINOR)
     @Description("Verify that the user can navigate to Sauce Labs facebook page via footer")
     public void clickOnFacebookTest() {
-        productsPage.chooseFooterLink(SiteConst.FACEBOOK);
+        productsPage.chooseFooterLink(Constants.FACEBOOK);
         Assert.assertTrue(sauceLabsFacebookPage.getPageUrl().contains("facebook"));
     }
 
@@ -31,7 +31,7 @@ public class FooterTests extends BaseTest {
     @Severity(SeverityLevel.MINOR)
     @Description("Verify that the user can navigate to Sauce Labs linkedin page via footer")
     public void clickOnLinkedinTest() {
-        productsPage.chooseFooterLink(SiteConst.LINKEDIN);
+        productsPage.chooseFooterLink(Constants.LINKEDIN);
         Assert.assertTrue(sauceLabsLinkedinPage.getPageUrl().contains("linkedin"));
     }
 }

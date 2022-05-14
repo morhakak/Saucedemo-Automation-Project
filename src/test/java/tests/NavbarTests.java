@@ -6,7 +6,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utils.SiteConst;
+import utils.Constants;
 
 @Feature("Navbar")
 public class NavbarTests extends BaseTest {
@@ -15,7 +15,7 @@ public class NavbarTests extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify that the user can successfully logout from the site")
     public void logoutTest() {
-        productsPage.clickOnMenuOption(SiteConst.LOGOUT);
+        productsPage.clickOnMenuOption(Constants.LOGOUT);
         Assert.assertTrue(loginPage.isLoginButtonVisible());
         initialLogin();
     }
@@ -24,7 +24,7 @@ public class NavbarTests extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify that the user can navigate to products page via navbar")
     public void viewAllItemsTest() {
-        productsPage.clickOnItem("Sauce Labs Backpack").clickOnMenuOption(SiteConst.ALL_ITEMS);
+        productsPage.clickOnItem("Sauce Labs Backpack").clickOnMenuOption(Constants.ALL_ITEMS);
         Assert.assertTrue(productsPage.isOnProductsPage());
     }
 
@@ -32,7 +32,7 @@ public class NavbarTests extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify that the user can navigate to about page via navbar")
     public void goToAboutPageTest() {
-        productsPage.clickOnMenuOption(SiteConst.ABOUT);
+        productsPage.clickOnMenuOption(Constants.ABOUT);
         Assert.assertTrue(saucelabsPage.getPageUrl().contains("saucelabs"));
     }
 
@@ -40,7 +40,7 @@ public class NavbarTests extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify that the user can reset app state via navbar")
     public void resetAppStateTest() {
-        productsPage.addItemToCart("Sauce Labs Backpack").clickOnMenuOption(SiteConst.RESET_APP_STATE);
+        productsPage.addItemToCart("Sauce Labs Backpack").clickOnMenuOption(Constants.RESET_APP_STATE);
         Assert.assertTrue(navbar.isCartEmpty());
     }
 }

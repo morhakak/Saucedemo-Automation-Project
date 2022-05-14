@@ -6,7 +6,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utils.SiteConst;
+import utils.Constants;
 
 public class ProductsPageTests extends BaseTest {
 
@@ -71,7 +71,7 @@ public class ProductsPageTests extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify that products are sorted by price from highest to lowest")
     public void isSortedFromHighToLowTest() {
-        productsPage.sortItems(SiteConst.PRICE_HIGH_TO_LOW);
+        productsPage.sortItems(Constants.PRICE_HIGH_TO_LOW);
         Assert.assertTrue(productsPage.isPricesSortedFromHighToLow());
     }
 
@@ -80,7 +80,7 @@ public class ProductsPageTests extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify that the products are sorted by price from lowest to highest")
     public void isSortedFromLowToHighTest() {
-        productsPage.sortItems(SiteConst.PRICE_LOW_TO_HIGH);
+        productsPage.sortItems(Constants.PRICE_LOW_TO_HIGH);
         Assert.assertFalse(productsPage.isPricesSortedFromHighToLow());
     }
 
@@ -89,7 +89,7 @@ public class ProductsPageTests extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify that products are sorted alphabetically from A to Z")
     public void isSortedFromAToZTest() {
-        productsPage.sortItems(SiteConst.NAME_A_TO_Z);
+        productsPage.sortItems(Constants.NAME_A_TO_Z);
         Assert.assertTrue(productsPage.isSortedFromAToZ());
     }
 
@@ -98,7 +98,7 @@ public class ProductsPageTests extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify that products are sorted alphabetically from Z to A")
     public void isSortedFromZToATest() {
-        productsPage.sortItems(SiteConst.NAME_Z_TO_A);
+        productsPage.sortItems(Constants.NAME_Z_TO_A);
         Assert.assertFalse(productsPage.isSortedFromZToA());
     }
 
