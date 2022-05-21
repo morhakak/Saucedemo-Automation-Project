@@ -42,23 +42,12 @@ public class Navbar extends Footer {
 
     @Step("Navbar: Click on {menuLink} option")
     public void clickOnMenuOption(Constants menuLink) {
+        openMenu();
         switch (menuLink) {
-            case ALL_ITEMS:
-                openMenu();
-                click(menuLinks.get(0));
-                break;
-            case ABOUT:
-                openMenu();
-                click(menuLinks.get(1));
-                break;
-            case LOGOUT:
-                openMenu();
-                click(menuLinks.get(2));
-                break;
-            case RESET_APP_STATE:
-                openMenu();
-                click(menuLinks.get(3));
-                break;
+            case ALL_ITEMS -> click(menuLinks.get(0));
+            case ABOUT -> click(menuLinks.get(1));
+            case LOGOUT -> click(menuLinks.get(2));
+            case RESET_APP_STATE -> click(menuLinks.get(3));
         }
     }
 

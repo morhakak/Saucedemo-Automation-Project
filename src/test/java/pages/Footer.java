@@ -18,15 +18,9 @@ public class Footer extends BasePage {
 
     public void chooseFooterLink(Constants SocialLink) {
         switch (SocialLink) {
-            case TWITTER:
-                clickOnTwitter();
-                break;
-            case FACEBOOK:
-                clickOnFacebook();
-                break;
-            case LINKEDIN:
-                clickOnLinkedin();
-                break;
+            case TWITTER -> clickOnTwitter();
+            case FACEBOOK -> clickOnFacebook();
+            case LINKEDIN -> clickOnLinkedin();
         }
     }
 
