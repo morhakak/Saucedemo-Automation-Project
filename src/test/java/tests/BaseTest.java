@@ -4,9 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,15 +14,14 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.*;
-import utils.ReadFromProperties;
 import utils.Constants;
-
+import utils.ReadFromProperties;
 import java.time.Duration;
-
 import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 
 public class BaseTest {
 
+    public static final String BASE_URL = ReadFromProperties.readProperty("url");
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected LoginPage loginPage;
@@ -48,32 +45,33 @@ public class BaseTest {
         if (driver == null) {
             String browser = ReadFromProperties.readProperty("browser");
             if ("firefox".equals(browser)) {
-                WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
+                driver = WebDriverManager.firefoxdriver().create();
             } else {
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("--incognito");
-                options.addArguments("--headless");
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver(options);
+                options.setHeadless(true);
+                driver =WebDriverManager.chromedriver().capabilities(options).create();
             }
 
         }
         testContext.setAttribute("WebDriver", this.driver);
-        allureEnvironmentWriter(
-                ImmutableMap.<String, String>builder()
-                        .put("Browser.Version", ((RemoteWebDriver) driver).getCapabilities().getBrowserVersion())
-                        .put("Browser", ((RemoteWebDriver) driver).getCapabilities().getBrowserName())
-                        .put("URL", ReadFromProperties.readProperty("url"))
-                        .build());
-        driver.get(ReadFromProperties.readProperty("url"));
+        writeInvVariablesToAllure();
+        driver.get(BASE_URL);
         driver.manage().window().maximize();
-        initPages();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        initPages();
 
         if (!this.getClass().getCanonicalName().contains("LoginPageTests") && !driver.findElements(By.id("login-button")).isEmpty()) {
             initialLogin();
         }
+    }
+
+    private void writeInvVariablesToAllure() {
+        allureEnvironmentWriter(
+                ImmutableMap.<String, String>builder()
+                        .put("Browser.Version", ((RemoteWebDriver) driver).getCapabilities().getBrowserVersion())
+                        .put("Browser", ((RemoteWebDriver) driver).getCapabilities().getBrowserName())
+                        .put("URL", BASE_URL)
+                        .build());
     }
 
     @AfterClass(alwaysRun = true)
@@ -131,7 +129,7 @@ public class BaseTest {
     }
 
     protected void goToBaseUrl() {
-        driver.get(ReadFromProperties.readProperty("url"));
+        driver.get(BASE_URL);
         wait.until(ExpectedConditions.visibilityOf(loginPage.getLoginButton()));
     }
 
